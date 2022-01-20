@@ -13,7 +13,7 @@ type person struct {
 	age  int
 }
 
-func main() {
+func main2() {
 	// Basic Print function
 	fmt.Println("Hello, World!")
 
