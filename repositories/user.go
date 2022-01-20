@@ -1,27 +1,3 @@
-package main
-
-import (
-	"encoding/json"
-	"fmt"
-	"log"
-	"math/rand"
-	"net/http"
-	"strconv"
-
-	"github.com/gorilla/mux"
-)
-
-/* *** I CAN'T SEEM TO FIX LOCAL FILE IMPORTS, SO I PUT THE ENTITY + THE REPOSITORY METHODS IN THE MAIN FILE *** */
-type User struct {
-	ID       string `json:"id"`
-	Email    string `json:"email"`
-	Phone    string `json:"phone"`
-	Password string `json:"password"`
-}
-
-// Setting up a slice for all the users here, since im not goint to use a database for this project
-var users []User
-
 // http://localhost:8000/users
 func getUsers(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Content-Type", "application/json")
@@ -84,26 +60,4 @@ func updateUser(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 	}
-}
-
-func main() {
-	// Basic Print function
-	fmt.Println("Hello, World!")
-
-	r := mux.NewRouter()
-
-	// Creating mock data
-	users = append(users, User{ID: "1", Email: "1@1", Phone: "1234", Password: "pass"})
-	users = append(users, User{ID: "2", Email: "2@2", Phone: "3232", Password: "word"})
-
-	// The 5 methods
-	r.HandleFunc("/users", getUsers).Methods("GET")
-	r.HandleFunc("/users/{id}", getUser).Methods("GET")
-	r.HandleFunc("/users", createUser).Methods("POST")
-	r.HandleFunc("/users/{id}", updateUser).Methods("PUT")
-	r.HandleFunc("/users/{id}", deleteUser).Methods("DELETE")
-
-	fmt.Printf("Starting server at port 8000\n")
-	log.Fatal(http.ListenAndServe(":8000", r))
-
 }
