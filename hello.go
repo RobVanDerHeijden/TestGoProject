@@ -7,9 +7,24 @@ import (
 	"math"
 )
 
+// Struct (kinda object without methods)
+type person struct {
+	name string
+	age  int
+}
+
 func main() {
 	// Basic Print function
-	//fmt.Println("Hello, World3!")
+	fmt.Println("Hello, World!")
+
+	// Making struct variable
+	p := person{name: "Rob", age: 28}
+	fmt.Println(p.age, p.name)
+
+	// Pointer simple example (& before variable gives memory example)
+	pointerExample := 9
+	incCalc(&pointerExample)
+	fmt.Println(pointerExample)
 
 	// Variables with short tag syntax   :=
 	x := 6
@@ -97,4 +112,9 @@ func sqrtCalc(x float64) (float64, error) {
 		return 0, errors.New("Undifined for negative numbers")
 	}
 	return math.Sqrt(x), nil
+}
+
+// Used for pointer example (* is for dereferencing)
+func incCalc(x *int) {
+	*x++
 }
